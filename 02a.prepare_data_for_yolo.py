@@ -6,7 +6,7 @@ from resizeimage import resizeimage
 from sklearn.cluster import KMeans
 
 def resizeImg(folder):
-    fileNames = glob.glob(folder + "/ground_truth/*.jpg")
+    fileNames = glob.glob(folder + "/*.jpg")
     
     
     for fileName in fileNames:
@@ -14,7 +14,7 @@ def resizeImg(folder):
         with open(fileName, 'r+b') as f:
             with Image.open(f) as image:
                 cover = resizeimage.resize_cover(image, [400, 300])
-                cover.save(folder + "/ground_truth/" + imgId + "_small.jpg", image.format)
+                cover.save(folder + "/" + imgId + "_small.jpg", image.format)
                 
 def name2cat(x):
     if x.startswith("label"):
@@ -44,13 +44,13 @@ def scaleSize(x):
     return str(int(int(x) / 11.52))
 
 def loadGroundTruth(folder):
-    fileNames = glob.glob(folder + "/ground_truth_xml/*.xml")
+    fileNames = glob.glob(folder + "_xml/*.xml")
     
     return "\n".join([processFile(fileName) for fileName in fileNames])
 
 def calcAnchors(folder):
     result = []
-    fileNames = glob.glob(folder + "/ground_truth_xml/*.xml")
+    fileNames = glob.glob(folder + "_xml/*.xml")
     
     for fileName in fileNames:
         x = processAnchor(fileName)
@@ -77,7 +77,7 @@ def processAnchor(filename):
     return [z for z in zip(x, y)]
                 
 if __name__ == '__main__':
-    baseFolder = "/home/dimitar/sources/datathon2019/data/Kaufland_DataThon+2019_04_participants"
+    baseFolder = "/home/dimitar/sources/datathon2019/data/Kaufland_DataThon+2019_04_participants/working"
     
     #resize files
     resizeImg(baseFolder)
