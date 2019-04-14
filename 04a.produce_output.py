@@ -50,7 +50,7 @@ def isMisplaced(x, y):
     return (x[2] < y[0]) or (x[0] > y[2])
 
 def isMissing(x, y):
-    return (y[2] - y[0]) > 1.5 * (x[2] - x[0])
+    return (y[2] - y[0]) > 2.3 * (x[2] - x[0])
     
 def processXMLFileOutput(filename, results):
     f = open(filename, "r")
